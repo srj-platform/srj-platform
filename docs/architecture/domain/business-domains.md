@@ -1,12 +1,17 @@
 # SRJ Platform Business Domains
 
+Version: 1.0
+
 ## Status
 
 Approved
 
+Last Updated: Sprint 22B
 ---
 
 # Vision
+
+This document serves as the business constitution of the SRJ Platform and defines the official business boundaries for all future development.
 
 SRJ Platform is an enterprise-grade, cloud-native, AI-ready platform designed to manage educational institutions through business domains rather than isolated software modules.
 
@@ -309,6 +314,14 @@ without requiring architectural redesign.
 The SRJ Platform is designed around Business Domains, not software modules.
 
 Every architectural decision must preserve domain boundaries, maintain low coupling, and maximize long-term scalability.
+
+---
+
+## Revision History
+
+| Version | Sprint | Description |
+|----------|---------|-------------|
+| 1.0 | Sprint 22B | Initial Business Domain Constitution |
 
 ---
 
