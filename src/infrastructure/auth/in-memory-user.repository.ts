@@ -2,7 +2,10 @@ import type { User } from "@/core/auth/user.types";
 import type { UserRepository } from "@/core/auth/user.repository";
 
 export class InMemoryUserRepository implements UserRepository {
-    private users: User[] = [];
+    private users: User[];
+    constructor(initialUsers: User[] = []) {
+        this.users = [...initialUsers];
+    }
 
     async findById(id: string): Promise<User | null> {
         return this.users.find((user) => user.id === id) ?? null;
