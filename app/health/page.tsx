@@ -1,10 +1,10 @@
-import { checkSupabaseHealth } from "@/src/infrastructure/supabase/health";
-import { organizationRepository } from "@/src/repositories/organization.repository";
+import { checkSupabaseHealth } from "@/infrastructure/supabase/health";
+import { organizationRepository } from "@/repositories/organization.repository";
 
 export default async function HealthPage() {
   const health = await checkSupabaseHealth();
   const organizationCount =
-  await organizationRepository.getCount();
+    await organizationRepository.getCount();
 
   const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
   const hasAnonKey = !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -48,23 +48,23 @@ export default async function HealthPage() {
               {health.connected
                 ? "✅ Connected"
                 : `❌ ${health.message}`}
-                
+
             </span>
-            
+
           </div>
-          
+
           <div className="flex items-center justify-between rounded-lg border p-4">
             <span>Organizations</span>
 
-             <span className="font-semibold text-blue-600">
-             {organizationCount}
-             </span>
+            <span className="font-semibold text-blue-600">
+              {organizationCount}
+            </span>
           </div>
 
         </div>
 
       </div>
-      
+
     </main>
   );
 }

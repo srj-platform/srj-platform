@@ -1,4 +1,4 @@
-import { supabase } from "@/src/infrastructure/supabase/client";
+import { supabase } from "@/infrastructure/supabase/client";
 
 export class OrganizationRepository {
   async getAll() {
