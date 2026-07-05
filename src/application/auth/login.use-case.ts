@@ -19,7 +19,7 @@ export class LoginUseCase {
         );
 
         const session =
-            this.sessionService.createSession(user);
+            await this.sessionService.createSession(user);
 
         return {
             user,

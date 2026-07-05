@@ -1,11 +1,17 @@
 import { randomUUID } from "crypto";
 import type { AuthUser } from "./auth.types";
 import type { Session } from "./session.types";
+import type { SessionRepository } from "./session.repository";
 
 export class SessionService {
+
+    constructor(
+        private readonly sessionRepository: SessionRepository
+    ) { }
+
     private static readonly SESSION_DURATION_HOURS = 8;
 
-    createSession(user: AuthUser): Session {
+    async createSession(user: AuthUser): Promise<Session> {
         const createdAt = new Date();
 
         const expiresAt = new Date(
@@ -13,7 +19,7 @@ export class SessionService {
             SessionService.SESSION_DURATION_HOURS * 60 * 60 * 1000
         );
 
-        return {
+        const session = {
             sessionId: randomUUID(),
             userId: user.id,
             organizationId: user.organizationId,
@@ -21,5 +27,7 @@ export class SessionService {
             createdAt,
             expiresAt,
         };
+        await this.sessionRepository.create(session);
+        return session;
     }
 }
