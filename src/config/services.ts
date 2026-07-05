@@ -1,11 +1,11 @@
 import { AuthService } from "@/core/auth/auth.service";
-import { InMemoryUserRepository } from "@/infrastructure/auth/in-memory-user.repository";
-import { seedUsers } from "@/infrastructure/auth/in-memory-user.seed";
+import { LoginUseCase } from "@/application/auth/login.use-case";
+import { bootstrapAuthentication } from "@/bootstrap/authentication.bootstrap";
 
-const users = await seedUsers();
-
-const userRepository = new InMemoryUserRepository(users);
+const userRepository = bootstrapAuthentication();
 
 export const authService = new AuthService(userRepository);
+
+export const loginUseCase = new LoginUseCase(authService);
 
 export { userRepository };

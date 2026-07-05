@@ -1,13 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { LoginRequest } from "@/core/auth/login-request.types";
+import { loginUseCase } from "@/config/services";
 
 export async function POST(request: NextRequest) {
-    const body = (await request.json()) as LoginRequest;
+    try {
+        const body = (await request.json()) as LoginRequest;
 
-    return NextResponse.json({
-        success: true,
-        received: {
-            email: body.email,
-        },
-    });
+        const user = await loginUseCase.execute(
+            body.email,
+            body.password
+        );
+
+        return NextResponse.json({
+            success: true,
+            user,
+        });
+
+    } catch (error) {
+        return NextResponse.json(
+            {
+                success: false,
+                message: error instanceof Error
+                    ? error.message
+                    : "Authentication failed.",
+            },
+            {
+                status: 401,
+            }
+        );
+    }
 }
