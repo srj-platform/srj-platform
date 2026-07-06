@@ -27,7 +27,13 @@ export class SessionService {
             createdAt,
             expiresAt,
         };
+
         await this.sessionRepository.create(session);
         return session;
     }
+    async getSession(
+        sessionId: string
+    ): Promise<Session | null> {
+        return this.sessionRepository.findById(sessionId);
+    };
 }
