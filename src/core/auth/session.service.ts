@@ -36,4 +36,9 @@ export class SessionService {
     ): Promise<Session | null> {
         return this.sessionRepository.findById(sessionId);
     };
+    async deleteSession(
+        sessionId: string
+    ): Promise<void> {
+        await this.sessionRepository.delete(sessionId);
+    }
 }
